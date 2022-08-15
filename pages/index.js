@@ -1,6 +1,7 @@
 
 import Head from "next/head";
 import Image from "next/image";
+
 import Header from "../components/Header";
 import TopStoriesPosts from "../components/TopStoriesPosts";
 import { client } from '../lib/client'
@@ -80,7 +81,9 @@ const Home = ({ posts }) => {
         {/* Post */}
         <div className="p-5  grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 gap-y-40 md:gap-6 md:gap-y-28 ">
           {posts.map((post) => (
+           
             <TopStoriesPosts key={post._id} post={post} />
+            
           ))}
         </div>
       </div>

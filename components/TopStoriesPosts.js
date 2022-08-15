@@ -1,7 +1,9 @@
+import Link from "next/link";
 import { urlFor } from "../lib/client";
 
 const TopStoriesPosts = ({ post }) => {
   return (
+    <Link href={`/stories/${post.slug.current}`}>
     <div className="cursor-pointer h-full relative pb-10">
       <img
         className=" rounded-lg h-40 md:h-60 w-full object-cover  lg:h-40"
@@ -24,6 +26,7 @@ const TopStoriesPosts = ({ post }) => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 

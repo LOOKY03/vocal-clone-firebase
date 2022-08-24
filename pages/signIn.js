@@ -116,9 +116,9 @@ function SignIn() {
               <Link href={""}>
                 <p>Forgot password?</p>
               </Link>
-              <Link href={""}>
-                <p>
-                  Don’t have an account? <span>Join</span>{" "}
+              <Link href='/signUp'>
+                <p className="cursor-pointer ">
+                  Don’t have an account? <span className="underline">Join</span>{" "}
                 </p>
               </Link>
             </div>
@@ -141,7 +141,7 @@ function SignIn() {
               onClick={""}
             >
               <img
-                src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Facebook_icon_2013.svg/640px-Facebook_icon_2013.svg.png"
                 className="h-6 mr-2"
                 alt=""
               />

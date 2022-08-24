@@ -44,7 +44,7 @@ const StoriesSlug = ({ sid }) => {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <p>details page: {id}</p>
+     
       <Header />
       <div className="max-w-4xl mx-auto p-16">
         <h1 className="text-5xl font-medium mb-5">{storyDetail.title}</h1>

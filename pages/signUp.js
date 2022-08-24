@@ -1,7 +1,26 @@
 import Link from "next/link";
 import React from "react";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth, db } from "../firebase";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
 
 const signUp = () => {
+  //let auth = getAuth();
+  const router = useRouter();
+  let googleProvider = new GoogleAuthProvider();
+  const collectionRef = collection(db, "users");
+
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSignInWithGoogle = () => {
     signInWithPopup(auth, googleProvider)
@@ -13,6 +32,23 @@ const signUp = () => {
       .catch((err) => {
         alert(err.message);
       });
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        console.log(response);
+        addDoc(collectionRef, {
+          email: email,
+          password: password,
+        });
+        router.push("/");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+    
   };
 
   return (
@@ -43,20 +79,20 @@ const signUp = () => {
               placeholder="password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Link href={'/signIn'}>
-            <button
-              className="bg-gray-800 text-white p-3 rounded-md mt-2"
-             
-            >
-              Sign Up
-            </button>
+            <Link href={"/signIn"}>
+              <button
+                className="bg-gray-800 text-white p-3 rounded-md mt-2"
+                onClick={handleRegister}
+              >
+                Sign Up
+              </button>
             </Link>
-           
+
             <div className="flex justify-center mt-3">
-        
-              <Link href={'/signIn'}>
+              <Link href={"/signIn"}>
                 <p className="cursor-pointer">
-                  Already have an account? <span className="underline">Sign in</span>{" "}
+                  Already have an account?{" "}
+                  <span className="underline">Sign in</span>{" "}
                 </p>
               </Link>
             </div>

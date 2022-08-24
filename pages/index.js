@@ -1,12 +1,36 @@
 
 import Head from "next/head";
 import Image from "next/image";
-
+import { useEffect, useState } from "react";
+import {db} from '../firebase'
+import { collection, getDocs } from "firebase/firestore";
 import Header from "../components/Header";
 import TopStoriesPosts from "../components/TopStoriesPosts";
-import { client } from '../lib/client'
+import Link from "next/link";
+import Footer from '../components/Footer'
 
-const Home = ({ posts }) => {
+
+const Home = () => {
+
+  const [storiesPost, setStoriesPost] = useState([])
+
+
+  const collectionRef = collection(db, 'stories')
+
+  const getData =()=> {
+    getDocs(collectionRef).then(response=> {
+      setStoriesPost(response.docs.map(item=> {
+        return {...item.data(), id: item.id}
+      }))
+    })
+  }
+
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+
   return (
     <>
       <div className="max-w-7xl mx-auto">
@@ -18,19 +42,22 @@ const Home = ({ posts }) => {
         <Header />
 
         {/* top stories */}
-        <div className="p-5 mt-5 grid col-span-1 sm:grid-cols-2 gap-3 md:gap-6">
-          <div className=" relative">
+        <div className="p-5 mt-5 grid col-span-1 sm:grid-cols-2 gap-3 md:gap-6 mb-16 lg:mb-0 md:mb-0">
+          <div className=" relative group">
             <div className="w-80 lg:w-fit">
               <h1 className="text-5xl font-bold ">Top Stories</h1>
               <p className="mt-4">
                 Find new, Handpicked stories you'll love, updated daily
               </p>
             </div>
+            <Link href={'/stories'}>
             <button className="border border-black p-2 rounded px-3 absolute top-10 right-0">
               Explore All
             </button>
+            </Link>
+           
             <img
-              className="rounded mt-5"
+              className="rounded mt-5 group-hover:scale-105 transition-transform duration-200 ease-in-out"
               src="https://images.unsplash.com/photo-1610372073608-05b64a89a864?fit=crop&fm=jpg&h=375&ixid=MnwzNTY3MHwwfDF8YWxsfHx8fHx8fHx8MTY1OTM5MTIwOQ&ixlib=rb-1.2.1&q=75&w=625&utm_medium=referral&utm_source=vocal.media"
               alt=""
             />
@@ -80,9 +107,9 @@ const Home = ({ posts }) => {
 
         {/* Post */}
         <div className="p-5  grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 gap-y-40 md:gap-6 md:gap-y-28 ">
-          {posts.map((post) => (
+          {storiesPost.map((post) => (
            
-            <TopStoriesPosts key={post._id} post={post} />
+            <TopStoriesPosts key={post.id} post={post} />
             
           ))}
         </div>
@@ -167,12 +194,12 @@ const Home = ({ posts }) => {
         </div>
       </div>
       {/* Creators */}
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-2xl font-medium">Creators Were Loving</h1>
+      <div className="max-w-7xl mx-auto mt-10 px-5">
+        <h1 className="text-3xl font-medium">Creators Were Loving</h1>
         <p>
           Meet the people in your communities creating extraordinary things.
         </p>
-        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 px-5 md:px-5 lg:px-0">
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 px-5 md:px-5 lg:px-0 mt-5">
           <div className="flex flex-col items-center border border-gray-200 py-5">
             <img
               className="h-40 "
@@ -237,6 +264,8 @@ const Home = ({ posts }) => {
             <p>5 published stories</p>
           </div>
         </div>
+        <hr className="mb-10 mt-10"/>
+        <Footer/>
       </div>
     </>
   );
@@ -244,27 +273,12 @@ const Home = ({ posts }) => {
 
 export default Home;
 
-export const getServerSideProps = async () => {
-  const query = `*[_type == 'post'] {
-    _id,
-    title,
-    subtitle,
-    publishedAt,
-    author -> {
-    name,
-    image
-  },
-    description,
-    mainImage,
-    slug
-   
-  }`;
+// export const getServerSideProps = async () => {
+ 
 
-  const posts = await client.fetch(query);
-
-  return {
-    props: {
-      posts,
-    },
-  };
-};
+//   return {
+//     props: {
+//       posts,
+//     },
+//   };
+// };

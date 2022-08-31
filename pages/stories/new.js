@@ -29,7 +29,7 @@ const NewStories = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (data) => {
-      //console.log(data)
+      console.log(data)
       setUsers(data);
     });
   }, []);

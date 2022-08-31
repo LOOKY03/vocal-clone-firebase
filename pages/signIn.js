@@ -78,6 +78,11 @@ function SignIn() {
       });
   };
 
+  const handleSignInAsDemoUser =(e)=> {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, 'testuser@yahoo.com', 'testing1234')
+  }
+
   return (
     <div>
       <main className="max-w-4xl mx-auto mt-10">
@@ -138,14 +143,10 @@ function SignIn() {
             </div>
             <div
               className="border border-gray-400 p-3 w-full rounded-md flex justify-center mb-10 cursor-pointer"
-              onClick={""}
+              onClick={handleSignInAsDemoUser}
             >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Facebook_icon_2013.svg/640px-Facebook_icon_2013.svg.png"
-                className="h-6 mr-2"
-                alt=""
-              />
-              <p>Sign In With Facebook</p>
+              
+              <p>Sign In As Demo User</p>
               
             </div>
             

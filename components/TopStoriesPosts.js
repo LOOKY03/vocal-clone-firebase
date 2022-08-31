@@ -27,7 +27,7 @@ const TopStoriesPosts = ({ post }) => {
 
   return (
     <Link href={`/stories/${post.id}`}>
-    <div className="cursor-pointer h-full relative pb-10 -mt-20 md:-mt-5 group">
+    <div className="cursor-pointer h-full relative pb-10 -mt-20 md:-mt-5 group mb-5">
       <img
         className=" rounded-lg h-40 md:h-60 w-full object-cover  lg:h-40 group-hover:scale-105 transition-transform duration-200 ease-in-out"
         src={post.image}

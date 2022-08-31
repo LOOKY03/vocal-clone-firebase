@@ -35,7 +35,7 @@ function YourStories() {
           New stories you’ll love, handpicked for you by our team and updated
           daily.
         </p>
-        <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 gap-5 gap-y-40 md:gap-y-28 mt-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 gap-5 gap-y-40 md:gap-y-28 mt-24 lg:mt-10 md:mt-10">
           {storiesPost.map((post) => (
             <TopStoriesPosts key={post.id} post={post} />
           ))}

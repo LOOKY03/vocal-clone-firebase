@@ -7,6 +7,7 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { useRouter } from "next/router";
@@ -16,11 +17,16 @@ import { addDoc, collection } from "firebase/firestore";
 const signUp = () => {
   //let auth = getAuth();
   const router = useRouter();
+  
   let googleProvider = new GoogleAuthProvider();
   const collectionRef = collection(db, "users");
+  
+ 
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState()
+
 
   const handleSignInWithGoogle = () => {
     signInWithPopup(auth, googleProvider)
@@ -39,10 +45,9 @@ const signUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((response) => {
         console.log(response);
-        addDoc(collectionRef, {
-          email: email,
-          password: password,
-        });
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        })
         router.push("/");
       })
       .catch((err) => {
@@ -65,6 +70,13 @@ const signUp = () => {
         <form className="flex flex-col w-2/4 mx-auto mt-24">
           <h1 className="text-center text-4xl font-semibold">Join Vocal</h1>
           <div className="flex flex-col mt-10 ">
+          <label className="text-lg">Name</label>
+            <input
+              type="text"
+              className="p-2 border-2 border-gray-400 rounded-md mt-2 mb-3 text-lg focus:border-blue-500 outline-0"
+              placeholder="Jane Smith"
+              onChange={(e) => setName(e.target.value)}
+            />
             <label className="text-lg">Email</label>
             <input
               type="text"

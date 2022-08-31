@@ -80,7 +80,13 @@ function SignIn() {
 
   const handleSignInAsDemoUser =(e)=> {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, 'testuser@yahoo.com', 'testing1234')
+    signInWithEmailAndPassword(auth, 'testuser@yahoo.com', 'testing1234').then(response=> {
+      console.log(response.user.email)
+      router.push("/");
+    })
+    .catch((err) => {
+      alert(err.message);
+    });
   }
 
   return (

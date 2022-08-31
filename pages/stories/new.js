@@ -78,6 +78,7 @@ const NewStories = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (data) => {
       console.log(data);
+      
     });
   }, []);
 

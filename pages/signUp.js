@@ -122,7 +122,7 @@ const signUp = () => {
               />
               <p>Sign In With Google</p>
             </div>
-            <div
+            {/* <div
               className="border border-gray-400 p-3 w-full rounded-md flex justify-center mb-10 cursor-pointer"
               onClick={""}
             >
@@ -132,7 +132,7 @@ const signUp = () => {
                 alt=""
               />
               <p>Sign In With Facebook</p>
-            </div>
+            </div> */}
           </div>
           <p className="mt-14">
             By continuing, you agree to our Privacy Policy and Terms of Use

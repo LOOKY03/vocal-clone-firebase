@@ -30,9 +30,18 @@ const NewStories = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (data) => {
       console.log(data)
-      setUsers(data);
+      if(data) {
+        setUsers(data);
+      } else {
+        router.push('/')
+      }
+     
     });
   }, []);
+
+
+
+
 
   console.log(users);
 

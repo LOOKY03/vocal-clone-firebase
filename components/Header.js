@@ -8,9 +8,11 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../firebase";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const [users, setUsers] = useState();
+  const router = useRouter()
 
   useEffect(() => {
     onAuthStateChanged(auth, (data) => {
@@ -67,7 +69,14 @@ const Header = () => {
           </svg>
           <h1>Join</h1>
           {users ? (
-            <button onClick={() => auth.signOut()}>Sign out</button>
+            <button
+              onClick={() => {
+                auth.signOut();
+                router.push('/')
+              }}
+            >
+              Sign out
+            </button>
           ) : (
             <Link href={"/signIn"}>
               <button>Sign in</button>
@@ -80,25 +89,24 @@ const Header = () => {
             </h1>
           </Link>
         </div>
-        
       </header>
       <hr />
-      <div className="flex justify-between items-center space-x-5 overflow-x-scroll px-2 lg:hidden">
-              <Link href="/">
-                <h1 className="cursor-pointer">Home</h1>
-              </Link>
+      <div className="flex justify-between items-center space-x-3 overflow-x-scroll px-2 lg:hidden">
+        <Link href="/">
+          <h1 className="cursor-pointer">Home</h1>
+        </Link>
 
-              <Link href="/stories">
-                <h1 className="cursor-pointer">Top Stories</h1>
-              </Link>
-              <Link href="/communities">
-                <h1 className="cursor-pointer">Communities</h1>
-              </Link>
+        <Link href="/stories">
+          <h1 className="cursor-pointer">Top Stories</h1>
+        </Link>
+        <Link href="/communities">
+          <h1 className="cursor-pointer">Communities</h1>
+        </Link>
 
-              <h1 className="cursor-pointer">Challenges</h1>
-              <h1 className="cursor-pointer">Resources</h1>
-              <h1 className="cursor-pointer">Vocal+</h1>
-            </div>
+        <h1 className="cursor-pointer">Challenges</h1>
+        <h1 className="cursor-pointer">Resources</h1>
+        <h1 className="cursor-pointer">Vocal+</h1>
+      </div>
     </>
   );
 };

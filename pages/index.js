@@ -51,7 +51,7 @@ const Home = () => {
               </p>
             </div>
             <Link href={'/stories'}>
-            <button className="border border-black p-2 rounded px-3 absolute top-10 right-0">
+            <button className="border border-black p-2 rounded px-3 absolute top-5 right-0 lg:top-10 lg:right-0">
               Explore All
             </button>
             </Link>
@@ -106,7 +106,7 @@ const Home = () => {
         </div>
 
         {/* Post */}
-        <div className="p-5  grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 gap-y-40 md:gap-6 md:gap-y-28 ">
+        <div className="p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 gap-y-24 md:gap-6 md:gap-y-10 ">
           {storiesPost.map((post) => (
            
             <TopStoriesPosts key={post.id} post={post} />
@@ -199,7 +199,7 @@ const Home = () => {
         <p>
           Meet the people in your communities creating extraordinary things.
         </p>
-        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 px-5 md:px-5 lg:px-0 mt-5">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5 px-5 md:px-5 lg:px-0 mt-5">
           <div className="flex flex-col items-center border border-gray-200 py-5">
             <img
               className="h-40 "

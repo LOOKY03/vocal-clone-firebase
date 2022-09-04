@@ -137,7 +137,7 @@ function SignIn() {
           </div>
           <div className="space-y-3 mt-5">
             <div
-              className="border border-gray-400 p-3 w-full rounded-md flex justify-center cursor-pointer"
+              className="border border-gray-400 p-2 w-full rounded-md flex justify-center items-center cursor-pointer"
               onClick={handleSignInWithGoogle}
             >
               <img
@@ -148,7 +148,7 @@ function SignIn() {
               <p>Sign In With Google</p>
             </div>
             <div
-              className="border border-gray-400 p-3 w-full rounded-md flex justify-center mb-10 cursor-pointer"
+              className="border border-gray-400 p-2 w-full rounded-md flex justify-center mb-10 cursor-pointer"
               onClick={handleSignInAsDemoUser}
             >
               
